@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% for post in posts %}
+<div class="col-md-6 fade-in" style="animation-delay: 0.1s; display: inline;">
+    <div class="blog-post bg-white p-4 h-100">
+        <img src="https://source.unsplash.com/random/600x400/?technology" alt="Post image"
+            class="img-fluid rounded mb-3">
+        <div class="d-flex mb-2">
+            <span class="badge bg-primary me-2">{{post.category}}</span>
+            <small class="text-muted">{{post.published_date}}</small>
+        </div>
+        <h2 class="blog-post-title">{{post.title}}</h2>
+        <p class="blog-post-meta">by <a href="#">{{post.author}}</a></p>
+        <p>{{post.content}}</p>
+        <p>you have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+        <a href="{% url 'post-detail' post.id %}" class="btn read-more-btn text-white mt-3">Read More</a>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}

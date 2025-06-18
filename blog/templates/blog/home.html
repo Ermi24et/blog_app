@@ -1,0 +1,196 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<!-- Featured Post -->
+<div class="container my-5 fade-in">
+    <div class="featured-post text-white p-5">
+        <div class="col-md-8">
+            <div class="badge bg-accent mb-3" style="background-color: var(--accent-color);">Featured</div>
+            <h1 class="featured-title mb-3">The Future of Creative Design in 2025</h1>
+            {% for category in categories %}
+            <h1>{{category}}</h1>
+            {% endfor %}
+            <p class="lead mb-4">Explore the latest trends and innovations that are shaping the creative industry this
+                year and beyond.</p>
+            <a href="#" class="btn btn-light btn-lg">Read Story <i class="bi bi-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <div class="row g-5">
+        <!-- Blog Posts -->
+        <div class="col-lg-8">
+            <div class="row g-4">
+                <!-- Post 1 -->
+                 {% for post in posts %}
+                <div class="col-md-6 fade-in" style="animation-delay: 0.1s;">
+                    <div class="blog-post bg-white p-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?technology" alt="Post image"
+                            class="img-fluid rounded mb-3">
+                        <div class="d-flex mb-2">
+                            <span class="badge bg-primary me-2">{{post.category}}</span>
+                            <small class="text-muted">{{post.published_date}}</small>
+                        </div>
+                        <h2 class="blog-post-title">{{post.title}}</h2>
+                        <p class="blog-post-meta">by <a href="#">{{post.author}}</a></p>
+                        <p>{{post.content}}</p>
+                        <a href="{% url 'post-detail' post.id %}" class="btn read-more-btn text-white mt-3">Read More</a>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- Post 2
+                <div class="col-md-6 fade-in" style="animation-delay: 0.2s;">
+                    <div class="blog-post bg-white p-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?business" alt="Post image"
+                            class="img-fluid rounded mb-3">
+                        <div class="d-flex mb-2">
+                            <span class="badge bg-success me-2">Business</span>
+                            <small class="text-muted">June 10, 2023</small>
+                        </div>
+                        <h2 class="blog-post-title">Building a Brand in the Digital Age</h2>
+                        <p class="blog-post-meta">by <a href="#">Michael Chen</a></p>
+                        <p>Discover the strategies that modern businesses are using to establish strong brand identities
+                            in an increasingly digital world.</p>
+                        <a href="#" class="btn read-more-btn text-white mt-3">Read More</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 fade-in" style="animation-delay: 0.3s;">
+                    <div class="blog-post bg-white p-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?travel" alt="Post image"
+                            class="img-fluid rounded mb-3">
+                        <div class="d-flex mb-2">
+                            <span class="badge bg-warning me-2">Travel</span>
+                            <small class="text-muted">June 5, 2023</small>
+                        </div>
+                        <h2 class="blog-post-title">Hidden Gems: Europe's Most Underrated Cities</h2>
+                        <p class="blog-post-meta">by <a href="#">Emma Wilson</a></p>
+                        <p>Skip the tourist crowds and explore these beautiful European cities that offer authentic
+                            experiences without the masses.</p>
+                        <a href="#" class="btn read-more-btn text-white mt-3">Read More</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 fade-in" style="animation-delay: 0.4s;">
+                    <div class="blog-post bg-white p-4 h-100">
+                        <img src="https://source.unsplash.com/random/600x400/?lifestyle" alt="Post image"
+                            class="img-fluid rounded mb-3">
+                        <div class="d-flex mb-2">
+                            <span class="badge bg-danger me-2">Lifestyle</span>
+                            <small class="text-muted">May 28, 2023</small>
+                        </div>
+                        <h2 class="blog-post-title">The Art of Mindful Productivity</h2>
+                        <p class="blog-post-meta">by <a href="#">David Kim</a></p>
+                        <p>Learn how to accomplish more by doing less through these mindful productivity techniques used
+                            by top performers.</p>
+                        <a href="#" class="btn read-more-btn text-white mt-3">Read More</a>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- Pagination -->
+            <nav class="mt-5 fade-in" style="animation-delay: 0.5s;">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- About Card -->
+            <div class="sidebar-card card mb-4 fade-in" style="animation-delay: 0.2s;">
+                <div class="card-body">
+                    <h3 class="sidebar-title mb-4">About The Blog</h3>
+                    <img src="https://source.unsplash.com/random/400x300/?writer" alt="About image"
+                        class="img-fluid rounded mb-3">
+                    <p>Creative Mind is a blog dedicated to exploring ideas at the intersection of technology, design,
+                        business, and lifestyle. Our mission is to inspire creativity and innovation.</p>
+                    <div class="d-grid">
+                        <a href="{% url 'about' %}" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="sidebar-card card mb-4 fade-in" style="animation-delay: 0.3s;">
+                <div class="card-body newsletter-form">
+                    <h3 class="sidebar-title mb-4">Newsletter</h3>
+                    <p>Subscribe to get notified about new articles and updates.</p>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Your Name">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn newsletter-btn text-white">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Popular Posts -->
+            <div class="sidebar-card card mb-4 fade-in" style="animation-delay: 0.4s;">
+                <div class="card-body">
+                    <h3 class="sidebar-title mb-4">Popular Posts</h3>
+                    <div class="list-group list-group-flush">
+                        <a href="#"
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">10 Design Trends for 2023</div>
+                                <small class="text-muted">May 20, 2023</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">1.2k</span>
+                        </a>
+                        <a href="#"
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Remote Work Productivity Hacks</div>
+                                <small class="text-muted">April 15, 2023</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">980</span>
+                        </a>
+                        <a href="#"
+                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Building a Personal Brand Online</div>
+                                <small class="text-muted">March 30, 2023</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">750</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="sidebar-card card fade-in" style="animation-delay: 0.5s;">
+                <div class="card-body">
+                    <h3 class="sidebar-title mb-4">Tags</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Design</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Tech</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Business</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Marketing</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Lifestyle</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Travel</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Productivity</a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Creativity</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}
