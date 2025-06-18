@@ -8,11 +8,11 @@
             <small class="text-muted">{{object.published_date|date:"F d, Y"}}</small>
         </div>
         <h2 class="blog-post-title">{{object.title}}</h2>
-        <p class="blog-post-meta">by <a href="#">{{object.author}}</a></p>
+        <p class="blog-post-meta">by <a href="{% url 'user-posts' object.author.username %}">{{object.author}}</a></p>
         <p>{{object.content}}</p><br>
         {% if object.author == user %}
-        <a href="{% url 'post-update' object.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
-        <a href="{% url 'post-delete' object.id %}" class="btn btn-outline-danger btn-sm mt-1 mb-1">Delete</a>
+        <a href="{% url 'post-update' slug=object.slug %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
+        <a href="{% url 'post-delete' slug=object.slug %}" class="btn btn-outline-danger btn-sm mt-1 mb-1">Delete</a>
         {% endif %}
 
     </div>

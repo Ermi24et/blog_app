@@ -1,7 +1,8 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<h2>You have been logged out</h2>
-<div>
-    <small>Login Again?<a href="{% url 'login' %}">Login</a></small>
+<div class="text-center mb-3">
+    <h2 class="fw-bold mb-3" style="color: var(--dark-color); ">You have been logged out</h2>
+    <a class="btn btn-outline-info" href="{% url 'login' %}">Login Again</a>
 </div>
+
 {% endblock content %}

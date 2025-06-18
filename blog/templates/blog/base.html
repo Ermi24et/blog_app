@@ -251,9 +251,10 @@
                 <a class="nav-link {% if request.path == '/' or request.path == '/blog/home/' %} active {% endif %}"
                   href="{% url 'home' %}">Home</a>
               </li>
+              {% url 'user-posts' user.username as user_posts_url %}
               <li class="nav-item">
-                <a class="nav-link {% if request.path == '/blog/' or request.path == '/posts/user/' %} active {% endif %}"
-                  href="{% url 'user-posts' %}">My Posts</a>
+                <a class="nav-link {% if request.path == '/blog/' or request.path == user_posts_url %} active {% endif %}"
+                  href="{{ user_posts_url }}">My Posts</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {% if request.path == '/user/profile/' %} active {% endif %}"

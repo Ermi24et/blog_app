@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Category, Post
+from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -20,18 +21,21 @@ class PostUserListView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'blog/user_posts.html'
+    paginate_by = 5
 
     def get_queryset(self):
-        return Post.objects.filter(author=self.request.user)
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by("-published_date")
 
 class PostListView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'blog/posts.html'
+    paginate_by = 5
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'slug', 'content', 'featured_image', 'category']
+    fields = ['title', 'content', 'featured_image', 'category']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -39,7 +43,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'slug', 'content', 'featured_image', 'category']
+    fields = ['title', 'content', 'featured_image', 'category']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -84,6 +88,8 @@ class CategoryPostListView(PostHomeListView):
 
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
 class TechnologyListView(CategoryPostListView):
     slug = 'technology'
