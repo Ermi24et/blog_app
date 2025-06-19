@@ -27,6 +27,8 @@
         </form>
 
         <div class="text-center mt-4 pt-3 small" style="border-top: 1px solid #f0f0f0;">
+          <span class="text-muted">Forgot your password? </span>
+          <a href="{% url 'password-reset' %}" class="fw-bold" style="color: var(--primary-color);">Reset Password</a><br>
           <span class="text-muted">New here? </span>
           <a href="{% url 'register' %}" class="fw-bold" style="color: var(--primary-color);">Sign Up</a>
         </div>

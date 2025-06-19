@@ -11,25 +11,53 @@
       <div class="card border-0 shadow-sm p-4">
         <form method="POST">
           {% csrf_token %}
-          
-          <div class="mb-3">
-            <input type="text" class="form-control" name="username" placeholder="Username" required>
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ form.non_field_errors }}
           </div>
-          
+          {% endif %}
+
           <div class="mb-3">
-            <input type="email" class="form-control" name="email" placeholder="Email" required>
-          </div>
-          
-          <div class="mb-3">
-            <input type="password" class="form-control" name="password1" placeholder="Password" required>
-          </div>
-          
-          <div class="mb-4">
-            <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required>
+            <input type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}" name="username"
+              placeholder="Username" value="{{form.username.value|default_if_none:''}}" required>
+            {% if form.username.errors %}
+            <div class="invalid-feedback">
+              {{ form.username.errors }}
+            </div>
+            {% endif %}
           </div>
 
-          <button type="submit" class="btn w-75 mx-auto d-block py-2 fw-bold" 
-                  style="background-color: var(--primary-color); color: white;">
+          <div class="mb-3">
+            <input type="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" name="email"
+              placeholder="Email" value="{{form.email.value|default_if_none:''}}" required>
+            {% if form.email.errors %}
+            <div class="invalid-feedback">
+              {{ form.email.errors }}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="mb-3">
+            <input type="password" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" name="password1" placeholder="Password" value="{{form.password1.value|default_if_none:''}}" required>
+            {% if form.password1.errors %}
+            <div class="invalid-feedback">
+              {{ form.password1.errors }}
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="mb-4">
+            <input type="password" class="form-control {% if form.password2.errors %}is-invalid{% endif %}" name="password2" placeholder="Confirm Password" value="{{form.password2.value|default_if_none:''}}" required>
+            {% if form.password2.errors %}
+            <div class="invalid-feedback">
+              {{ form.password2.errors }}
+            </div>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="btn w-75 mx-auto d-block py-2 fw-bold"
+            style="background-color: var(--primary-color); color: white;">
             Sign Up
           </button>
         </form>
@@ -47,21 +75,25 @@
   .card {
     border-radius: 12px;
   }
+
   .form-control {
     border: 1px solid #e0e0e0;
     padding: 10px 15px;
     border-radius: 8px;
     background-color: #fafafa;
   }
+
   .form-control:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
     background-color: white;
   }
+
   .btn {
     transition: all 0.3s ease;
     border-radius: 8px;
   }
+
   .btn:hover {
     background-color: var(--secondary-color) !important;
     transform: translateY(-2px);
