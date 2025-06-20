@@ -1,4 +1,31 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<h1>This is About page</h1>
-{% endblock content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 mt-5">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold" style="color: var(--dark-color);">About Creative Mind Blog</h2>
+        <div class="mx-auto" style="height:3px; width:100px; background: var(--accent-color);"></div>
+      </div>
+
+      <div class="card border-0 shadow-sm p-4">
+        <p class="lead text-muted">
+          <strong>Creative Mind Blog</strong> is a modern web application built for writers, thinkers, and creatives who love to share ideas, tell stories, and inspire minds.
+        </p>
+
+        <p>
+          Our platform allows users to easily write, manage, and publish blog posts in a clean, distraction-free environment. Whether you're a professional writer or just getting started, Creative Mind Blog offers the tools and community you need to grow your creative voice.
+        </p>
+
+        <p>
+          This app is developed with Django (Python) on the backend, and styled with a custom CSS theme. The focus is on simplicity, performance, and creativity.
+        </p>
+
+        <p>
+          Thank you for visiting. We hope Creative Mind Blog helps you express yourself and connect with others who share your passion for writing.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

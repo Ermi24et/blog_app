@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.text import slugify
+from PIL import Image
+import os
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -37,7 +39,17 @@ class Post(models.Model):
                 slug = f'{base_slug}-{counter}'
                 counter += 1
             self.slug = slug
+
         super().save(*args, **kwargs)
+
+        if self.featured_image:
+            img_path = self.featured_image.path
+            img = Image.open(img_path)
+
+            if img.height > 600 or img.width > 900:
+                output_size = (900, 600)  # adjust as needed
+                img.thumbnail(output_size, Image.LANCZOS)  # LANCZOS gives better quality
+                img.save(img_path, optimize=True, quality=90)  
 
     def __str__(self):
         return self.title

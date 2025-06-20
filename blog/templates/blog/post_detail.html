@@ -1,20 +1,33 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<div class="col-md-6 fade-in" style="animation-delay: 0.1s; display: inline;">
-    <div class="blog-post bg-white p-4 h-100">
-        <img src="background.jpg" alt="Post image" class="img-fluid rounded mb-3">
-        <div class="d-flex mb-2">
-            <span class="badge bg-primary me-2">{{object.category}}</span>
-            <small class="text-muted">{{object.published_date|date:"F d, Y"}}</small>
-        </div>
-        <h2 class="blog-post-title">{{object.title}}</h2>
-        <p class="blog-post-meta">by <a href="{% url 'user-posts' object.author.username %}">{{object.author}}</a></p>
-        <p>{{object.content}}</p><br>
-        {% if object.author == user %}
-        <a href="{% url 'post-update' slug=object.slug %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
-        <a href="{% url 'post-delete' slug=object.slug %}" class="btn btn-outline-danger btn-sm mt-1 mb-1">Delete</a>
-        {% endif %}
+<div class="col-lg-8 mx-auto fade-in" style="animation-delay: .1s;">
+  <div class="blog-post bg-white p-4 shadow-sm">
 
+    <h2 class="blog-post-title mb-3">{{ object.title }}</h2><br>
+
+    {% if object.featured_image %}
+      <div class="ratio ratio-4x3 mb-4">
+        <img
+          src="{{ object.featured_image.url }}"
+          alt="{{ object.title }}"
+          style="object-fit: cover;">
+      </div>
+    {% endif %}
+
+    <div class="d-flex mb-2">
+      <span class="badge bg-primary me-2">{{ object.category }}</span>
+      <small class="text-muted">{{ object.published_date|date:"F d, Y" }}</small>
     </div>
+    <p class="blog-post-meta">
+      by <a href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+    </p>
+
+    <p>{{ object.content|linebreaks }}</p>
+
+    {% if object.author == user %}
+      <a href="{% url 'post-update' slug=object.slug %}" class="btn btn-secondary btn-sm mt-1">Update</a>
+      <a href="{% url 'post-delete' slug=object.slug %}" class="btn btn-outline-danger btn-sm mt-1">Delete</a>
+    {% endif %}
+  </div>
 </div>
 {% endblock content %}
